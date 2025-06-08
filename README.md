@@ -1,6 +1,6 @@
 # Sistema de Gestión de Inventario
 
-Una aplicación de Django REST Framework con una interfaz basada en Bootstrap para gestionar clientes, productos, inventario y suarios (solo superusuarios).
+Una aplicación de Django REST Framework con una interfaz basada en Bootstrap para gestionar clientes, productos, inventario y usuarios (solo superusuarios).
 
 ## Instrucciones de Configuración
 
