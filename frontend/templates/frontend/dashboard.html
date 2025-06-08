@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>Bienvenido al sistema de inventario</h2>
+  <p>Hola, <strong>{{ user.username }}</strong>! Este es el dashboard.</p>
+  <div class="row">
+    {% if user.is_superuser %}
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Usuarios</h5>
+          <p class="card-text">Administra la información de los usuarios</p>
+          <a href="{% url 'frontend:users' %}" class="btn btn-primary">Ir a Usuarios</a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Clientes</h5>
+          <p class="card-text">Administra la información de los clientes</p>
+          <a href="{% url 'frontend:clients' %}" class="btn btn-primary">Ir a Clientes</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Productos</h5>
+          <p class="card-text">Administra la información de los productos</p>
+          <a href="{% url 'frontend:products' %}" class="btn btn-primary">Ir a Productos</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Inventario</h5>
+          <p class="card-text">Administra el stock de los productos</p>
+          <a href="{% url 'frontend:inventory' %}" class="btn btn-primary">Ir a Inventario</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
