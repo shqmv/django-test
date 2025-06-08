@@ -6,22 +6,15 @@ from django.contrib import messages
 
 
 def login_view(request):
-    print(f"frontend.views.login_view: {request.method}")
     if request.method == 'POST':
-        print(f"Flag 1")
         username = request.POST.get('username')
         password = request.POST.get('password')
-        print(f"Flag 2")
         user = authenticate(request, username=username, password=password)
-        print(f"Flag 3")
         if user:
-            print(f"Flag 4")
             login(request, user)
             token, _ = Token.objects.get_or_create(user=user)
             return render(request, 'frontend/dashboard.html', {'user': user, 'auth_token': token.key})
-        print(f"Flag 5")
         messages.error(request, "Invalid email or password.")
-    print(f"Flag 6")
     return render(request, 'frontend/login.html')
 
 

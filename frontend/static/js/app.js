@@ -7,12 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const tokenElement = document.getElementById('auth-token');
   if (tokenElement) {
     sessionStorage.setItem('auth_token', tokenElement.value);
-    console.log('Token stored:', tokenElement.value); // Debug log
   } else {
     console.error('Token element not found');
   }
   const token = sessionStorage.getItem('auth_token');
-  console.log('Token retrieved:', token); // Debug log
 
   // Load data for tables
   async function loadTableData(endpoint, tableId, fields) {
@@ -45,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
         row.appendChild(actionsCell);
         tbody.appendChild(row);
       });
-      console.log(`Table ${tableId} updated for endpoint ${endpoint}`);
     } catch (error) {
       console.error(`Error loading data from ${endpoint}:`, {
         status: error.response?.status,
@@ -195,7 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
           errorMessage += error.message || 'Error desconocido';
         }
         alert(errorMessage);
-        console.log(`Error saving product: ${(error.response?.data || 'Unknown error')}`)
       }
     });
     loadTableData('products', 'productsTable', ['name', 'description', 'price', 'category']);
@@ -256,7 +252,6 @@ document.addEventListener('DOMContentLoaded', () => {
           errorMessage += error.message || 'Error desconocido';
         }
         alert(errorMessage);
-        console.log(`Error saving inventory: ${(error.response?.data || 'Unknown error')}`)
       }
     });
     loadTableData('inventory', 'inventoryTable', ['product_name', 'quantity', 'entry_date', 'observations']);
@@ -318,7 +313,6 @@ document.addEventListener('DOMContentLoaded', () => {
           data: error.response?.data,
           message: error.message
         });
-        console.log(`Error loading item for edit: ${error.response?.status || ''} ${error.response?.data?.detail || error.message || 'Unknown error'}`)
       }
     }
 
@@ -349,11 +343,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }[endpoint];
 
       try {
-        console.log(`Attempting to delete from ${endpoint} with ID ${id}`);
         await axios.delete(`/api/${endpoint}/${id}/`, {
           headers: { Authorization: `Token ${token}` }
         });
-        console.log(`Deletion successful for ${endpoint} ID ${id}`);
         // Hide confirmation modal
         bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal')).hide();
       } catch (error) {
@@ -364,7 +356,6 @@ document.addEventListener('DOMContentLoaded', () => {
           data: error.response?.data,
           message: error.message
         });
-        console.log(`Error deleting item: ${error.response?.status || ''} ${error.response?.data?.detail || error.message || 'Unknown error'}`)
         // Hide confirmation modal
         bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal')).hide();
       } finally {
